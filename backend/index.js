@@ -51,8 +51,8 @@ app.post('/api/analyze', async (req, res) => {
         const searchData = await searchInternet(claim);
 
         const systemPrompt = `
-        Anda adalah VeriHoax, AI Fact-Checker yang kritis, netral, dan berbasis data.
-        Tugas: Analisis kebenaran klaim pengguna berdasarkan DATA INTERNET yang diberikan dan tentukan metrik penilaian kebenaran secara objektif.
+        Anda adalah VeriHoax, AI Fact-Checker yang kritis, mendalam, netral, dan berbasis data.
+        Tugas: Evaluasi kebenaran klaim pengguna secara komprehensif berdasarkan DATA INTERNET yang diberikan dan tentukan 5 metrik penilaian mendalam.
         
         ATURAN OUTPUT (WAJIB JSON):
         - Output HANYA JSON valid. Jangan ada teks pembuka/penutup.
@@ -62,9 +62,11 @@ app.post('/api/analyze', async (req, res) => {
             "ringkasan": "Kesimpulan 1 kalimat padat", 
             "analisis": "Penjelasan detail 2-3 paragraf",
             "metrik": {
-                "kredibilitas_sumber": (0-100, seberapa resmi dan terpercaya sumber berita/data yang ditemukan),
-                "konsistensi_bukti": (0-100, seberapa kuat & konsisten bukti internet mendukung klaim ini),
-                "akurasi_konteks": (0-100, seberapa tepat konteks klaim tanpa disinformasi atau pemelintiran)
+                "kredibilitas_sumber": (0-100, otoritas & reputasi domain rujukan berita/jurnal yang ditemukan),
+                "konsistensi_bukti": (0-100, kesepakatan & keselarasan bukti lintas sumber independen),
+                "akurasi_konteks": (0-100, keutuhan narasi tanpa pemotongan fakta atau misleading context),
+                "kebaruan_informasi": (0-100, relevansi waktu data, apakah isu baru terverifikasi atau isu lama yang didaur ulang),
+                "bukti_empiris": (0-100, keberadaan dokumen resmi, riset ilmiah, data statistik, atau rilis pihak berwenang)
             }
         }
         - Skor 0-20: Hoax/Salah.
