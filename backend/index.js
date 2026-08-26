@@ -105,7 +105,11 @@ app.post('/api/analyze', async (req, res) => {
     }
 });
 
-const PORT = 8080;
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`VeriHoax telah berjalan di port ${PORT}`);
-});
+export default app;
+
+if (!process.env.VERCEL) {
+    const PORT = process.env.PORT || 8080;
+    app.listen(PORT, '0.0.0.0', () => {
+        console.log(`VeriHoax telah berjalan di port ${PORT}`);
+    });
+}
