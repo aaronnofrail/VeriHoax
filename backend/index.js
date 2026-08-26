@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import axios from 'axios';
 import Groq from 'groq-sdk'; // untuk memanggil groq
 
-dotenv.config();
+dotenv.config({ path: ['../.env', '.env'] });
 const app = express();
 
 if (!process.env.GROQ_API_KEY || !process.env.TAVILY_API_KEY) {
@@ -19,7 +19,7 @@ app.use(express.json());
 
 async function searchInternet(query) {
     try {
-        console.log(`🔎 Searching Tavily: "${query}"...`);
+        console.log(`[Search] Searching Tavily: "${query}"...`);
         const response = await axios.post('https://api.tavily.com/search', {
             api_key: process.env.TAVILY_API_KEY,
             query: query,
@@ -35,7 +35,7 @@ async function searchInternet(query) {
             sources: response.data.results.map(r => ({ title: r.title, url: r.url }))
         };
     } catch (error) {
-        console.error("⚠️ Search Error:", error.message);
+        console.error("[Search Error]:", error.message);
         return { text: "", sources: [] };
     }
 }
@@ -46,7 +46,7 @@ app.post('/api/analyze', async (req, res) => {
     if (!claim) return res.status(400).json({ error: 'Input klaim kosong!' });
 
     try {
-        console.log(`\n📩 Input: "${claim}"`);
+        console.log(`\n[Input]: "${claim}"`);
 
         const searchData = await searchInternet(claim);
 
@@ -74,14 +74,14 @@ app.post('/api/analyze', async (req, res) => {
         ${searchData.text ? searchData.text : "Tidak ada data internet spesifik, gunakan pengetahuan umum Anda namun beri peringatan."}
         `;
 
-        console.log('⚡ Mengirim ke Groq (Llama 3.3)...');
+        console.log('[Groq] Mengirim ke Groq (Llama 3.3)...');
         
         const completion = await groq.chat.completions.create({
             messages: [
                 { role: "system", content: systemPrompt },
                 { role: "user", content: userPrompt }
             ],
-            model: "llama-3.3-70b-versatile", 
+            model: "groq/compound-mini", 
             temperature: 0.5,
             max_tokens: 1024,
             response_format: { type: "json_object" } 
