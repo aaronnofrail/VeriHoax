@@ -187,7 +187,7 @@
                 <label for="claimInput" class="text-xs font-bold uppercase tracking-wider text-slate-300">
                     Verifikasi 
                 </label>
-                <div class="flex items-center gap-3">
+                <!-- <div class="flex items-center gap-3">
                     <button id="btnPaste" class="text-xs text-blue-400 hover:text-blue-300 font-medium flex items-center gap-1 transition-colors">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
@@ -200,7 +200,7 @@
                         </svg>
                         Bersihkan
                     </button>
-                </div>
+                </div> -->
             </div>
 
             <!-- Textarea Area -->
@@ -303,13 +303,13 @@
                             <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
                             </svg>
-                            <!-- <span>Salin Laporan</span> -->
+                            <span>Salin Laporan</span>
                         </button>
                         <button id="btnResetSearch" class="px-4 py-2.5 rounded-xl bg-blue-600/20 hover:bg-blue-600/30 border border-blue-500/30 text-xs font-semibold text-blue-300 transition-all flex items-center gap-2 active:scale-95">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
                             </svg>
-                            <!-- <span>Cek Klaim Lain</span> -->
+                            <span>Cek Yang Lain</span>
                         </button>
                     </div>
 
@@ -319,16 +319,76 @@
             <!-- Summary Card -->
             <div class="panel-card rounded-2xl p-6">
                 <div class="flex items-center gap-2 mb-3">
-                    <!-- <div class="p-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div> -->
                     <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Ringkasan</h3>
                 </div>
                 <p id="resRingkasan" class="text-base sm:text-lg font-semibold text-slate-100 leading-snug">
                     -
                 </p>
+            </div>
+
+            <!-- Metrics Evaluation Card -->
+            <div id="metricsCard" class="panel-card rounded-2xl p-6">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Metrics Penilaian</h3>
+                    <span class="text-[11px] text-slate-500 font-medium">5 Indikator</span>
+                </div>
+                <div class="space-y-4">
+                    <!-- 1. Kredibilitas Sumber -->
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-medium mb-1">
+                            <span class="text-slate-200 font-semibold">Kredibilitas Sumber Data</span>
+                            <span id="valKredibilitas" class="font-mono text-blue-400 font-bold">0%</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mb-1.5">Otoritas & reputasi domain rujukan berita/jurnal</p>
+                        <div class="w-full bg-navy-950 rounded-full h-2 overflow-hidden border border-slate-800">
+                            <div id="barKredibilitas" class="bg-blue-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <!-- 2. Konsistensi Bukti -->
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-medium mb-1">
+                            <span class="text-slate-200 font-semibold">Konsistensi Bukti Lintas Media</span>
+                            <span id="valKonsistensi" class="font-mono text-indigo-400 font-bold">0%</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mb-1.5">Kesepakatan bukti dari berbagai sumber independen</p>
+                        <div class="w-full bg-navy-950 rounded-full h-2 overflow-hidden border border-slate-800">
+                            <div id="barKonsistensi" class="bg-indigo-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <!-- 3. Akurasi Konteks -->
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-medium mb-1">
+                            <span class="text-slate-200 font-semibold">Akurasi Konteks & Narasi</span>
+                            <span id="valKonteks" class="font-mono text-teal-400 font-bold">0%</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mb-1.5">Keutuhan fakta tanpa pemotongan atau pemelintiran narasi</p>
+                        <div class="w-full bg-navy-950 rounded-full h-2 overflow-hidden border border-slate-800">
+                            <div id="barKonteks" class="bg-teal-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <!-- 4. Kebaruan Informasi -->
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-medium mb-1">
+                            <span class="text-slate-200 font-semibold">Kebaruan & Relevansi Waktu</span>
+                            <span id="valKebaruan" class="font-mono text-purple-400 font-bold">0%</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mb-1.5">Keteraktualan isu dan deteksi hoax daur ulang</p>
+                        <div class="w-full bg-navy-950 rounded-full h-2 overflow-hidden border border-slate-800">
+                            <div id="barKebaruan" class="bg-purple-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    <!-- 5. Bukti Empiris -->
+                    <div>
+                        <div class="flex items-center justify-between text-xs font-medium mb-1">
+                            <span class="text-slate-200 font-semibold">Ketersediaan Bukti Empiris</span>
+                            <span id="valEmpiris" class="font-mono text-emerald-400 font-bold">0%</span>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mb-1.5">Riset ilmiah, data statistik, atau rilis resmi otoritas</p>
+                        <div class="w-full bg-navy-950 rounded-full h-2 overflow-hidden border border-slate-800">
+                            <div id="barEmpiris" class="bg-emerald-500 h-full rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Detailed Analysis Card -->
@@ -471,29 +531,33 @@
             let currentAnalysisResult = null;
 
             // --- Character Counter ---
-            claimInput.addEventListener('input', () => {
-                charCount.innerText = claimInput.value.length;
-            });
+            if (claimInput && charCount) {
+                claimInput.addEventListener('input', () => {
+                    charCount.innerText = claimInput.value.length;
+                });
+            }
 
             // --- Quick Sample Chips ---
             document.querySelectorAll('.sample-chip').forEach(chip => {
                 chip.addEventListener('click', () => {
                     // Extract text without emoji
                     const text = chip.innerText.replace(/^[^\w\s]+/, '').trim();
-                    claimInput.value = text;
-                    charCount.innerText = text.length;
-                    claimInput.focus();
+                    if (claimInput) {
+                        claimInput.value = text;
+                        if (charCount) charCount.innerText = text.length;
+                        claimInput.focus();
+                    }
                     showToast('Contoh klaim berhasil diinput', 'info');
                 });
             });
 
             // --- Paste & Clear Actions ---
-            btnPaste.addEventListener('click', async () => {
+            btnPaste?.addEventListener('click', async () => {
                 try {
                     const text = await navigator.clipboard.readText();
-                    if (text) {
+                    if (text && claimInput) {
                         claimInput.value = text;
-                        charCount.innerText = text.length;
+                        if (charCount) charCount.innerText = text.length;
                         showToast('Berhasil dipaste dari Clipboard', 'success');
                     }
                 } catch (err) {
@@ -501,21 +565,23 @@
                 }
             });
 
-            btnClear.addEventListener('click', () => {
-                claimInput.value = '';
-                charCount.innerText = '0';
-                claimInput.focus();
+            btnClear?.addEventListener('click', () => {
+                if (claimInput) {
+                    claimInput.value = '';
+                    if (charCount) charCount.innerText = '0';
+                    claimInput.focus();
+                }
             });
 
             // Keyboard shortcut Ctrl+Enter or Cmd+Enter
-            claimInput.addEventListener('keydown', (e) => {
+            claimInput?.addEventListener('keydown', (e) => {
                 if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
                     e.preventDefault();
                     triggerAnalysis();
                 }
             });
 
-            analyzeButton.addEventListener('click', triggerAnalysis);
+            analyzeButton?.addEventListener('click', triggerAnalysis);
 
             // --- Main Analysis Logic ---
             async function triggerAnalysis() {
@@ -542,7 +608,12 @@
                 const stepTimer2 = setTimeout(() => activateStep(step3), 4500);
 
                 try {
-                    const apiUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+                    const isLocal = !window.location.hostname || 
+                                    window.location.hostname === 'localhost' || 
+                                    window.location.hostname === '127.0.0.1' || 
+                                    window.location.protocol === 'file:';
+
+                    const apiUrl = isLocal
                         ? 'http://localhost:8080/api/analyze'
                         : '/api/analyze';
 
@@ -605,6 +676,25 @@
                 const skor = aiRes.skor || 0;
                 resSkor.innerText = `${skor}%`;
                 resRingkasan.innerText = aiRes.ringkasan || 'Tidak ada ringkasan.';
+
+                // Render Metrics Bars
+                const metrik = aiRes.metrik || {};
+                const kredibilitas = metrik.kredibilitas_sumber ?? Math.min(100, Math.max(10, skor + 10));
+                const konsistensi = metrik.konsistensi_bukti ?? skor;
+                const akurasi = metrik.akurasi_konteks ?? skor;
+                const kebaruan = metrik.kebaruan_informasi ?? Math.min(100, Math.max(20, skor + 5));
+                const empiris = metrik.bukti_empiris ?? skor;
+
+                document.getElementById('valKredibilitas').innerText = `${kredibilitas}%`;
+                document.getElementById('barKredibilitas').style.width = `${kredibilitas}%`;
+                document.getElementById('valKonsistensi').innerText = `${konsistensi}%`;
+                document.getElementById('barKonsistensi').style.width = `${konsistensi}%`;
+                document.getElementById('valKonteks').innerText = `${akurasi}%`;
+                document.getElementById('barKonteks').style.width = `${akurasi}%`;
+                document.getElementById('valKebaruan').innerText = `${kebaruan}%`;
+                document.getElementById('barKebaruan').style.width = `${kebaruan}%`;
+                document.getElementById('valEmpiris').innerText = `${empiris}%`;
+                document.getElementById('barEmpiris').style.width = `${empiris}%`;
 
                 // Formatting Analysis Text into Clean Paragraphs
                 const analysisText = aiRes.analisis || '';
@@ -676,15 +766,15 @@
             }
 
             // --- Reset & Copy Actions ---
-            btnResetSearch.addEventListener('click', () => {
+            btnResetSearch?.addEventListener('click', () => {
                 resultSection.classList.add('hidden');
-                claimInput.value = '';
-                charCount.innerText = '0';
+                if (claimInput) claimInput.value = '';
+                if (charCount) charCount.innerText = '0';
                 window.scrollTo({ top: 0, behavior: 'smooth' });
-                claimInput.focus();
+                claimInput?.focus();
             });
 
-            btnCopyReport.addEventListener('click', () => {
+            btnCopyReport?.addEventListener('click', () => {
                 if (!currentAnalysisResult) return;
                 
                 const reportText = `VERIHOAX FACT-CHECK REPORT\n------------------------------\nKlaim: "${currentAnalysisResult.claim}"\nSkor Kebenaran: ${currentAnalysisResult.skor}%\nKesimpulan: ${currentAnalysisResult.ringkasan}\n\nDetail Analisis:\n${currentAnalysisResult.analisis}\n\nDiperiksa via VeriHoax Platform`;
@@ -718,9 +808,10 @@
 
             function updateHistoryUI() {
                 const history = getHistory();
-                historyBadge.innerText = history.length;
-                historyTotalText.innerText = `Total: ${history.length} klaim`;
+                if (historyBadge) historyBadge.innerText = history.length;
+                if (historyTotalText) historyTotalText.innerText = `Total: ${history.length} klaim`;
 
+                if (!historyList) return;
                 historyList.innerHTML = '';
                 if (history.length === 0) {
                     historyList.innerHTML = `
@@ -757,20 +848,20 @@
                     `;
 
                     item.addEventListener('click', () => {
-                        claimInput.value = h.claim;
-                        charCount.innerText = h.claim.length;
+                        if (claimInput) claimInput.value = h.claim;
+                        if (charCount) charCount.innerText = h.claim.length;
                         currentAnalysisResult = h;
                         renderResultUI(h);
-                        resultSection.classList.remove('hidden');
+                        resultSection?.classList.remove('hidden');
                         closeHistoryDrawer();
-                        resultSection.scrollIntoView({ behavior: 'smooth' });
+                        resultSection?.scrollIntoView({ behavior: 'smooth' });
                     });
 
                     historyList.appendChild(item);
                 });
             }
 
-            btnClearHistory.addEventListener('click', () => {
+            btnClearHistory?.addEventListener('click', () => {
                 if (confirm('Yakin ingin menghapus semua riwayat verifikasi?')) {
                     localStorage.removeItem('verihoax_history');
                     updateHistoryUI();
@@ -779,24 +870,26 @@
             });
 
             function openHistoryDrawer() {
+                if (!historyDrawer) return;
                 historyDrawer.classList.remove('hidden');
                 setTimeout(() => {
-                    historyBackdrop.classList.remove('opacity-0');
-                    historyPanel.classList.remove('translate-x-full');
+                    historyBackdrop?.classList.remove('opacity-0');
+                    historyPanel?.classList.remove('translate-x-full');
                 }, 10);
             }
 
             function closeHistoryDrawer() {
-                historyBackdrop.classList.add('opacity-0');
-                historyPanel.classList.add('translate-x-full');
+                if (!historyDrawer) return;
+                historyBackdrop?.classList.add('opacity-0');
+                historyPanel?.classList.add('translate-x-full');
                 setTimeout(() => {
                     historyDrawer.classList.add('hidden');
                 }, 300);
             }
 
-            btnToggleHistory.addEventListener('click', openHistoryDrawer);
-            btnCloseHistory.addEventListener('click', closeHistoryDrawer);
-            historyBackdrop.addEventListener('click', closeHistoryDrawer);
+            btnToggleHistory?.addEventListener('click', openHistoryDrawer);
+            btnCloseHistory?.addEventListener('click', closeHistoryDrawer);
+            historyBackdrop?.addEventListener('click', closeHistoryDrawer);
 
             // Initialize History UI on Load
             updateHistoryUI();
